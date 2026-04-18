@@ -16,7 +16,7 @@
 @section('content')
 <div class="callout callout-warning mb-3">
     <h6><i class="fas fa-lock mr-1"></i>Read-Only Fields</h6>
-    <small>The <strong>Consignment Note Number</strong>, <strong>Tracking Number</strong>, and <strong>Delivery Status</strong> cannot be changed here. To update status, use the status update panel on the detail page.</small>
+    <small>The <strong>Consignment Note Number</strong> is also used as the <strong>Tracking Number</strong>. It and the <strong>Delivery Status</strong> cannot be changed here. To update status, use the status update panel on the detail page.</small>
 </div>
 
 <form action="{{ route('admin.consignments.update', $consignment->id) }}" method="POST" id="editForm">
@@ -35,7 +35,7 @@
                             CN: <strong>{{ $consignment->consignment_note_number }}</strong>
                         </span>
                         <span class="badge badge-secondary p-2 d-block">
-                            TRK: <strong>{{ $consignment->tracking_number }}</strong>
+                            Tracking = CN: <strong>{{ $consignment->tracking_number }}</strong>
                         </span>
                     </div>
                 </div>
@@ -66,9 +66,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Phone Number <span class="text-danger">*</span></label>
+                                <label>Phone Number</label>
                                 <input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror"
-                                       value="{{ old('phone_number', $consignment->phone_number) }}" required>
+                                       value="{{ old('phone_number', $consignment->phone_number) }}">
                                 @error('phone_number')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                         </div>
@@ -157,9 +157,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Address <span class="text-danger">*</span></label>
+                        <label>Address </label>
                         <textarea name="consigner_address" class="form-control @error('consigner_address') is-invalid @enderror"
-                                  rows="2" required>{{ old('consigner_address', $consignment->consigner_address) }}</textarea>
+                                  rows="2">{{ old('consigner_address', $consignment->consigner_address) }}</textarea>
                         @error('consigner_address')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
@@ -190,9 +190,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Address <span class="text-danger">*</span></label>
+                        <label>Address</label>
                         <textarea name="consignee_address" class="form-control @error('consignee_address') is-invalid @enderror"
-                                  rows="2" required>{{ old('consignee_address', $consignment->consignee_address) }}</textarea>
+                                  rows="2">{{ old('consignee_address', $consignment->consignee_address) }}</textarea>
                         @error('consignee_address')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
@@ -215,9 +215,9 @@
                                value="{{ old('actual_weight', $consignment->actual_weight) }}" required>
                     </div>
                     <div class="form-group">
-                        <label>Chargeable Weight (kg) <span class="text-danger">*</span></label>
+                           <label>Chargeable Weight (kg)</label>
                         <input type="number" name="chargeable_weight" class="form-control" min="0" step="0.01"
-                               value="{{ old('chargeable_weight', $consignment->chargeable_weight) }}" required>
+                               value="{{ old('chargeable_weight', $consignment->chargeable_weight) }}">
                     </div>
                 </div>
             </div>
@@ -227,19 +227,19 @@
                 <div class="card-header"><h3 class="card-title"><i class="fas fa-rupee-sign mr-2"></i>Amount</h3></div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label>Total Amount (₹) <span class="text-danger">*</span></label>
+                        <label>Total Amount (₹)</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">₹</span></div>
                             <input type="number" name="total_amount" class="form-control" min="0" step="0.01"
-                                   value="{{ old('total_amount', $consignment->total_amount) }}" required>
+                                   value="{{ old('total_amount', $consignment->total_amount) }}">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Grand Total (₹) <span class="text-danger">*</span></label>
+                        <label>Grand Total (₹)</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">₹</span></div>
                             <input type="number" name="grand_total" class="form-control" min="0" step="0.01"
-                                   value="{{ old('grand_total', $consignment->grand_total) }}" required>
+                                   value="{{ old('grand_total', $consignment->grand_total) }}">
                         </div>
                     </div>
                 </div>

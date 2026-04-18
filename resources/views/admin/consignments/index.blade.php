@@ -89,7 +89,7 @@
                 <tr>
                     <th>#</th>
                     <th>CN Number</th>
-                    <th>Tracking No.</th>
+                    <th>Tracking = CN</th>
                     <th>Booking Date</th>
                     <th>Consigner</th>
                     <th>Consignee</th>

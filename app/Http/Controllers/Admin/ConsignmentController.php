@@ -55,12 +55,12 @@ class ConsignmentController extends Controller
             'consignment_note_number' => 'required|string|max:30|unique:consignments,consignment_note_number',
             'booking_date'          => 'required|date_format:d/m/Y',
             'consigner_name'        => 'required|string|max:191',
-            'consigner_address'     => 'required|string',
+            'consigner_address'     => 'nullable|string',
             'consigner_gst_number'  => 'nullable|string|max:30',
             'consignee_name'        => 'required|string|max:191',
-            'consignee_address'     => 'required|string',
+            'consignee_address'     => 'nullable|string',
             'consignee_gst_number'  => 'nullable|string|max:30',
-            'phone_number'          => 'required|string|max:20',
+            'phone_number'          => 'nullable|string|max:20',
             'item_description'      => 'required|string',
             'origin'                => 'required|string|max:191',
             'destination'           => 'required|string|max:191',
@@ -68,16 +68,18 @@ class ConsignmentController extends Controller
             'destination_branch_id' => 'nullable|exists:branches,id',
             'no_of_boxes'           => 'required|integer|min:1',
             'actual_weight'         => 'required|numeric|min:0',
-            'chargeable_weight'     => 'required|numeric|min:0',
+            'chargeable_weight'     => 'nullable|numeric|min:0',
             'service_mode'          => 'required|in:road,air,rail,express',
-            'total_amount'          => 'required|numeric|min:0',
-            'grand_total'           => 'required|numeric|min:0',
+            'total_amount'          => 'nullable|numeric|min:0',
+            'grand_total'           => 'nullable|numeric|min:0',
             'final_remark'          => 'nullable|string',
         ]);
 
         $validated['created_by'] = Auth::guard('admin')->id();
-        $validated['consignment_note_number'] = strtoupper(trim($validated['consignment_note_number']));
         $validated['booking_date'] = Carbon::createFromFormat('d/m/Y', $validated['booking_date'])->format('Y-m-d');
+        $validated['chargeable_weight'] = $validated['chargeable_weight'] ?? 0;
+        $validated['total_amount'] = $validated['total_amount'] ?? 0;
+        $validated['grand_total'] = $validated['grand_total'] ?? 0;
 
         $consignment = null;
 
@@ -128,12 +130,12 @@ class ConsignmentController extends Controller
         $validated = $request->validate([
             'booking_date'          => 'required|date_format:d/m/Y',
             'consigner_name'        => 'required|string|max:191',
-            'consigner_address'     => 'required|string',
+            'consigner_address'     => 'nullable|string',
             'consigner_gst_number'  => 'nullable|string|max:30',
             'consignee_name'        => 'required|string|max:191',
-            'consignee_address'     => 'required|string',
+            'consignee_address'     => 'nullable|string',
             'consignee_gst_number'  => 'nullable|string|max:30',
-            'phone_number'          => 'required|string|max:20',
+            'phone_number'          => 'nullable|string|max:20',
             'item_description'      => 'required|string',
             'origin'                => 'required|string|max:191',
             'destination'           => 'required|string|max:191',
@@ -141,14 +143,17 @@ class ConsignmentController extends Controller
             'destination_branch_id' => 'nullable|exists:branches,id',
             'no_of_boxes'           => 'required|integer|min:1',
             'actual_weight'         => 'required|numeric|min:0',
-            'chargeable_weight'     => 'required|numeric|min:0',
+            'chargeable_weight'     => 'nullable|numeric|min:0',
             'service_mode'          => 'required|in:road,air,rail,express',
-            'total_amount'          => 'required|numeric|min:0',
-            'grand_total'           => 'required|numeric|min:0',
+            'total_amount'          => 'nullable|numeric|min:0',
+            'grand_total'           => 'nullable|numeric|min:0',
             'final_remark'          => 'nullable|string',
         ]);
 
         $validated['booking_date'] = Carbon::createFromFormat('d/m/Y', $validated['booking_date'])->format('Y-m-d');
+        $validated['chargeable_weight'] = $validated['chargeable_weight'] ?? 0;
+        $validated['total_amount'] = $validated['total_amount'] ?? 0;
+        $validated['grand_total'] = $validated['grand_total'] ?? 0;
 
         $consignment->update($validated);
 

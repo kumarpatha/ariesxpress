@@ -16,11 +16,12 @@ class TrackingController extends Controller
     {
         $request->validate([
             'tracking_number' => 'required|string',
-            'phone_number'    => 'required|string',
         ]);
 
-        $consignment = Consignment::where('tracking_number', strtoupper(trim($request->tracking_number)))
-                                  ->where('phone_number', trim($request->phone_number))
+        $trackingNumber = strtoupper(trim($request->tracking_number));
+
+        $consignment = Consignment::where('consignment_note_number', $trackingNumber)
+                                  ->orWhere('tracking_number', $trackingNumber)
                                   ->with(['statusLogs' => function ($q) {
                                       $q->orderBy('created_at', 'asc');
                                   }])
@@ -29,7 +30,7 @@ class TrackingController extends Controller
         if (! $consignment) {
             return back()
                 ->withInput()
-                ->withErrors(['tracking_number' => 'No shipment found with this tracking number and phone number combination. Please check and try again.']);
+                ->withErrors(['tracking_number' => 'No shipment found with this consignment number. Please check and try again.']);
         }
 
         return view('tracking.result', compact('consignment'));

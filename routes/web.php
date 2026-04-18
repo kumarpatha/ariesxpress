@@ -4,7 +4,15 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ConsignmentController;
+use App\Http\Controllers\PublicInquiryController;
 use App\Http\Controllers\TrackingController;
+
+// ── Public Website Routes ───────────────────────────────────────────────────
+Route::view('/', 'public.home')->name('home');
+Route::view('/about', 'public.about')->name('about');
+Route::view('/services', 'public.services')->name('services');
+Route::view('/contact', 'public.contact')->name('contact');
+Route::post('/inquiries', [PublicInquiryController::class, 'store'])->name('inquiries.store');
 
 // ── Public Tracking Routes ──────────────────────────────────────────────────
 Route::get('/track', [TrackingController::class, 'index'])->name('tracking.index');
@@ -35,6 +43,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 // Logout
-Route::post('logout', [AuthController::class, 'logout'])->middleware('web')->name('logout');
-// Root redirect
-Route::get('/', fn () => redirect()->route('admin.login'));
+Route::post('admin/logout', [AuthController::class, 'logout'])->middleware('web')->name('admin.logout');

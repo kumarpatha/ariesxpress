@@ -18,18 +18,11 @@
             <div class="card-body py-3">
                 <div class="d-flex align-items-center justify-content-between flex-wrap">
                     <div>
-                        <small class="text-muted d-block">Consignment Note Number</small>
+                        <small class="text-muted d-block">Consignment / Tracking Number</small>
                         <h3 class="mb-0 font-weight-bold text-primary" id="cnNumber">
                             {{ $consignment->consignment_note_number }}
                         </h3>
-                        <small class="text-muted d-block mt-1">Tracking Number</small>
-                        <h5 class="mb-0 font-weight-bold text-secondary">
-                            {{ $consignment->tracking_number }}
-                            <button onclick="copyToClipboard('{{ $consignment->tracking_number }}')"
-                                    class="btn btn-xs btn-outline-secondary ml-1">
-                                <i class="fas fa-copy mr-1"></i>Copy
-                            </button>
-                        </h5>
+                        <small class="text-muted d-block mt-1">Same number is used for customer tracking</small>
                     </div>
                     <div class="text-right">
                         <span class="badge badge-{{ \App\Models\Consignment::getStatusBadgeClass($consignment->delivery_status) }} badge-lg p-2">

@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
 
 class Consignment extends Model
 {
@@ -42,27 +41,14 @@ class Consignment extends Model
     {
         parent::boot();
 
+        static::saving(function ($consignment) {
+            $consignment->consignment_note_number = strtoupper(trim((string) $consignment->consignment_note_number));
+            $consignment->tracking_number = $consignment->consignment_note_number;
+        });
+
         static::creating(function ($consignment) {
-            if (empty($consignment->tracking_number)) {
-                $consignment->tracking_number = self::generateTrackingNumber();
-            }
             $consignment->delivery_status = 'booking';
         });
-    }
-
-    public static function generateTrackingNumber(): string
-    {
-        $datePart = Carbon::now()->format('Ymd');
-        $prefix   = 'TRK-' . $datePart . '-';
-
-        $last = static::where('tracking_number', 'like', $prefix . '%')
-                      ->orderBy('tracking_number', 'desc')
-                      ->lockForUpdate()
-                      ->value('tracking_number');
-
-        $nextSeq = $last ? ((int) substr($last, -5)) + 1 : 1;
-
-        return $prefix . str_pad($nextSeq, 5, '0', STR_PAD_LEFT);
     }
 
     // Relationships

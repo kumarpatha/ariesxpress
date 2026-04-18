@@ -67,9 +67,9 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label>Phone Number <span class="text-danger">*</span></label>
+                                <label>Phone Number</label>
                                 <input type="text" name="phone_number" class="form-control @error('phone_number') is-invalid @enderror"
-                                       placeholder="Mobile / Phone" value="{{ old('phone_number') }}" required>
+                                       placeholder="Mobile / Phone" value="{{ old('phone_number') }}">
                                 @error('phone_number')<div class="invalid-feedback">{{ $message }}</div>@enderror
                             </div>
                         </div>
@@ -160,9 +160,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Consigner Address <span class="text-danger">*</span></label>
+                        <label>Consigner Address</label>
                         <textarea name="consigner_address" class="form-control @error('consigner_address') is-invalid @enderror"
-                                  rows="2" placeholder="Full address including city, state, pincode" required>{{ old('consigner_address') }}</textarea>
+                                  rows="2" placeholder="Full address including city, state, pincode">{{ old('consigner_address') }}</textarea>
                         @error('consigner_address')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
@@ -194,9 +194,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Consignee Address <span class="text-danger">*</span></label>
+                        <label>Consignee Address</label>
                         <textarea name="consignee_address" class="form-control @error('consignee_address') is-invalid @enderror"
-                                  rows="2" placeholder="Full address including city, state, pincode" required>{{ old('consignee_address') }}</textarea>
+                                  rows="2" placeholder="Full address including city, state, pincode">{{ old('consignee_address') }}</textarea>
                         @error('consignee_address')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
@@ -226,9 +226,9 @@
                         @error('actual_weight')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <label>Chargeable Weight (kg) <span class="text-danger">*</span></label>
+                           <label>Chargeable Weight (kg)</label>
                         <input type="number" name="chargeable_weight" class="form-control @error('chargeable_weight') is-invalid @enderror"
-                               min="0" step="0.01" placeholder="0.00" value="{{ old('chargeable_weight') }}" required>
+                               min="0" step="0.01" placeholder="0.00" value="{{ old('chargeable_weight') }}">
                         @error('chargeable_weight')<div class="invalid-feedback">{{ $message }}</div>@enderror
                     </div>
                 </div>
@@ -241,24 +241,24 @@
                 </div>
                 <div class="card-body">
                     <div class="form-group">
-                        <label>Total Amount (₹) <span class="text-danger">*</span></label>
+                        <label>Total Amount (₹)</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">₹</span></div>
                             <input type="number" name="total_amount" id="total_amount"
                                    class="form-control @error('total_amount') is-invalid @enderror"
                                    min="0" step="0.01" placeholder="0.00"
-                                   value="{{ old('total_amount', 0) }}" required>
+                                   value="{{ old('total_amount', 0) }}">
                         </div>
                         @error('total_amount')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
                     <div class="form-group">
-                        <label>Grand Total (₹) <span class="text-danger">*</span></label>
+                        <label>Grand Total (₹)</label>
                         <div class="input-group">
                             <div class="input-group-prepend"><span class="input-group-text">₹</span></div>
                             <input type="number" name="grand_total" id="grand_total"
                                    class="form-control @error('grand_total') is-invalid @enderror"
                                    min="0" step="0.01" placeholder="0.00"
-                                   value="{{ old('grand_total', 0) }}" required>
+                                   value="{{ old('grand_total', 0) }}">
                         </div>
                         @error('grand_total')<div class="text-danger small mt-1">{{ $message }}</div>@enderror
                     </div>
@@ -284,7 +284,7 @@
                 <div class="card-body">
                     <div class="callout callout-info mb-3">
                         <h6><i class="fas fa-info-circle mr-1"></i>Tracking Number</h6>
-                        <small>A unique <strong>Tracking Number</strong> (format: <strong>TRK-YYYYMMDD-XXXXX</strong>) will be auto-generated upon saving. Customers can use this to track their shipment.</small>
+                        <small>The <strong>Consignment Note Number</strong> will also be used as the <strong>Tracking Number</strong> for customers.</small>
                     </div>
                     <button type="submit" class="btn btn-success btn-block btn-lg">
                         <i class="fas fa-save mr-2"></i>Create Booking
